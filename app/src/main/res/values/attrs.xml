@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="colorIcon" format="color|reference" />
+    <attr name="primaryText" format="color|reference" />
+    <attr name="secondaryText" format="color|reference" />
+    <attr name="colorToolbar" format="color|reference" />
+
+</resources>

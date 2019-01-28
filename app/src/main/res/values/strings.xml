@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Contacts Test</string>
+
+    <string name="image_transition">contact-avatar-transition</string>
 </resources>

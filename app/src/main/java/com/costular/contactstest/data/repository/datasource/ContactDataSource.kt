@@ -1,9 +1,10 @@
-package com.costular.contactstest.domain.repository
+package com.costular.contactstest.data.repository.datasource
 
 import com.costular.contactstest.domain.model.Contact
+import io.reactivex.Observable
 import io.reactivex.Single
 
-interface ContactRepository {
+interface ContactDataSource {
 
     fun getContacts(): Single<List<Contact>>
 

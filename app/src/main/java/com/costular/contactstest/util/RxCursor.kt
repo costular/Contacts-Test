@@ -14,15 +14,17 @@ class RxCursor<T> private constructor(private val cursorObservable: Observable<C
 
     companion object {
         fun <T> from(cursor: Cursor, cursorMapper: CursorMapper<T>): RxCursor<T> {
-            val cursorObservable = Observable.create<Cursor> {
-                cursor.moveToFirst()
-                while (cursor.moveToNext() && !it.isDisposed) {
-                    it.onNext(cursor)
-                }
-                cursor.close()
+            val cursorObservable = Observable.create<Cursor> { emitter ->
+                cursor.use {
+                    it.moveToFirst()
 
-                if (!it.isDisposed) {
-                    it.onComplete()
+                    do {
+                        emitter.onNext(cursor)
+                    } while (cursor.moveToNext() && !emitter.isDisposed)
+                }
+
+                if (!emitter.isDisposed) {
+                    emitter.onComplete()
                 }
             }
             return RxCursor<T>(cursorObservable).apply {
